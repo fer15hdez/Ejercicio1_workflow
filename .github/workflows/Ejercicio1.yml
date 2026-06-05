@@ -9,8 +9,11 @@ defaults:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      VARIABLE_ENTORNO: 0.145.0
     steps:
       - name: Mostrar secret
         run: |
           echo "El secret: ${{ secrets.TEST_SECRET }}"
-          echo "El autor del commit es ${{ github.actor }}"     
+          echo "El autor del commit es ${{ github.actor }}"
+          echo "La VARIABLE_ENTORNO es: ${VARIABLE_ENTORNO}"     
