@@ -11,4 +11,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Mostrar secret
-        run: "El secret: echo ${{ secrets.TEST_SECRET }}"         
+        run: "El secret: echo ${{ secrets.TEST_SECRET }}"     
