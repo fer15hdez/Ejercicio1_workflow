@@ -11,4 +11,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Mostrar secret
-        run: "El secret: echo ${{ secrets.TEST_SECRET }}"     
+        run: |
+          echo "El secret: ${{ secrets.TEST_SECRET }}"
+          echo "El autor del commit es ${{ github.actor }}"     
