@@ -38,4 +38,4 @@ jobs:
           push: true # Le ordena a la acción que suba (push) la imagen a Docker Hub inmediatamente después de compilarla con éxito.
           tags: |
             ${{ secrets.TOKEN_USERNAME_DOCKERHUB }}/my-hello-world:latest
-            ${{ secrets.DOCKERHUB_USERNAME }}/my-hello-world:${{ github.sha }}
+            ${{ secrets.TOKEN_USERNAME_DOCKERHUB }}/my-hello-world:${{ github.sha }}
