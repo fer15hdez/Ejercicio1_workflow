@@ -38,7 +38,7 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: . # Indica que el contexto de compilación es la raíz de tu repositorio.
-          # file: ./Dockerfile # Ruta hacia tu archivo Dockerfile. Puedes omitir esta línea si se encuentra en la raíz del proyecto.
+          file: ./img/Dockerfile # Ruta hacia tu archivo Dockerfile. Puedes omitir esta línea si se encuentra en la raíz del proyecto.
           push: true # Le ordena a la acción que suba (push) la imagen a Docker Hub inmediatamente después de compilarla con éxito.
           tags: |
             ${{ secrets.TOKEN_USERNAME_DOCKERHUB }}/my-hello-world:latest
