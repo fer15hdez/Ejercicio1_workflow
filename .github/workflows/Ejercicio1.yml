@@ -28,6 +28,9 @@ jobs:
       
       # Iniciar sesión en Docker Hub utilizando del repositorio
       - name: Login in docker hub
+        # ¡PRIMER IF! Solo nos logueamos si NO es un Pull Request
+        # (No tiene sentido loguearse si no vamos a subir nada)
+        if: github.event_name != 'pull_request'
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.TOKEN_USERNAME_DOCKERHUB }}
@@ -39,7 +42,8 @@ jobs:
         with:
           context: . # Indica que el contexto de compilación es la raíz de tu repositorio.
           file: ./img/Dockerfile # Ruta hacia tu archivo Dockerfile. Puedes omitir esta línea si se encuentra en la raíz del proyecto.
-          push: true # Le ordena a la acción que suba (push) la imagen a Docker Hub inmediatamente después de compilarla con éxito.
+          # push: true # Le ordena a la acción que suba (push) la imagen a Docker Hub inmediatamente después de compilarla con éxito. Con el valor 'false'  no sube la imagen.  
+          push: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
           tags: |
             ${{ secrets.TOKEN_USERNAME_DOCKERHUB }}/my-hello-world:latest
             ${{ secrets.TOKEN_USERNAME_DOCKERHUB }}/my-hello-world:${{ github.sha }}
