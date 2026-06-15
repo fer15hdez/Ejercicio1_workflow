@@ -43,6 +43,8 @@ jobs:
           context: . # Indica que el contexto de compilación es la raíz de tu repositorio.
           file: ./img/Dockerfile # Ruta hacia tu archivo Dockerfile. Puedes omitir esta línea si se encuentra en la raíz del proyecto.
           # push: true # Le ordena a la acción que suba (push) la imagen a Docker Hub inmediatamente después de compilarla con éxito. Con el valor 'false'  no sube la imagen.  
+          # ¡SEGUNDO IF DINÁMICO! 
+          # 'push' será true solo si el evento es un push directo a 'main'
           push: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
           tags: |
             ${{ secrets.TOKEN_USERNAME_DOCKERHUB }}/my-hello-world:latest
