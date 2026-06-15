@@ -18,6 +18,10 @@ jobs:
           echo "Variables de Github (autor del commit es) ${{ github.actor }}"
           echo "La VARIABLE_ENTORNO declarada en este archivo es: ${VARIABLE_ENTORNO}"   
       
+      # CRUCIAL: Descargar el código del repositorio en la máquina virtual
+      - name: Descargar código del repositorio
+        uses: actions/checkout@v4
+
       # Configurar Buildx (permite compilar para múltiples plataformas y usar caché avanzada)
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3    
