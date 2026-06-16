@@ -4,4 +4,3 @@ FROM alpine
 WORKDIR /app
 RUN echo "Hello world"
 CMD ["echo", "Hello world form CMD"]
-

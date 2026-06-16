@@ -1,8 +1,9 @@
 name: Show secret
 on:
   push:
-    branches:
-      - main
+    branches: [ "stage" ]
+  pull_request:
+    branches: [ "main" ]    
 defaults:
   run:
     shell: bash
