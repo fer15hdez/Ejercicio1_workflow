@@ -1,7 +1,7 @@
 name: Show secret
 on:
   push:
-    branches: [ "main", "stage" ]
+    branches: [ "stage" ]
   pull_request:
     branches: [ "main" ]    
 defaults:
