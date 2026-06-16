@@ -2,8 +2,8 @@ name: Show secret
 on:
   push:
     branches: [ "stage" ]
-  pull_request:
-    branches: [ "main" ]    
+  #pull_request:
+   # branches: [ "main" ]    
 defaults:
   run:
     shell: bash
@@ -31,7 +31,8 @@ jobs:
       - name: Login in docker hub
         # ¡PRIMER IF! Solo nos logueamos si NO es un Pull Request
         # (No tiene sentido loguearse si no vamos a subir nada)
-        if: github.event_name != 'pull_request'
+        # if: github.event_name == 'pull_request'
+        if: github.event.pull_request.merged == true
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.TOKEN_USERNAME_DOCKERHUB }}
@@ -46,7 +47,8 @@ jobs:
           # push: true # Le ordena a la acción que suba (push) la imagen a Docker Hub inmediatamente después de compilarla con éxito. Con el valor 'false'  no sube la imagen.  
           # ¡SEGUNDO IF DINÁMICO! 
           # 'push' será true solo si el evento es un push directo a 'main'
-          push: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+          # push: ${{ github.event_name == 'pull_request' && github.base_ref == 'main' }}
+          push: ${{ github.base_ref == 'main' }}
           tags: |
             ${{ secrets.TOKEN_USERNAME_DOCKERHUB }}/my-hello-world:latest
             ${{ secrets.TOKEN_USERNAME_DOCKERHUB }}/my-hello-world:${{ github.sha }}
